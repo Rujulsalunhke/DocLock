@@ -51,7 +51,7 @@ The smart contract (in folder `chaincode-xyz`) implements the following function
 
 Note that the asset transfer implemented by the smart contract is a simplified scenario, without ownership validation, meant only to demonstrate how to invoke transactions.
 
-![ Create Asset](./images/create-asset.png)  ![ Update Asset](./images/update-asset.png)
+![ Create Asset](./images/create-asset.png)
 
 ## Running the sample
 
