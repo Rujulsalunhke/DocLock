@@ -1,0 +1,80 @@
+html,
+body {
+    height: 100%;
+    /* Full viewport height */
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1;
+    /* Takes up remaining space */
+}
+
+.footer {
+    background-color: #2C115C;
+    padding: 20px 0;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    margin-top: 55px;
+    position: relative;
+    bottom: 0;
+
+}
+
+.footer p,
+.footer a {
+    color: #fff;
+    font-weight: 400;
+}
+
+.footer-logo {
+    margin-bottom: 10px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-contact {
+    list-style: none;
+    padding: 0;
+    font-weight: 400;
+}
+
+.footer-contact li {
+    margin-bottom: 10px;
+}
+
+.flex-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.flex-content {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

@@ -1,0 +1,171 @@
+.wrapper {
+  padding-top: 30px;
+}
+
+body h3 {
+  margin-bottom: 25px;
+}
+
+
+.navbar-brand a {
+  color: #ffffff;
+}
+
+.form-wrapper,
+.table-wrapper {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.table-wrapper {
+  max-width: 700px;
+}
+
+.edit-link {
+  padding: 7px 10px;
+  font-size: 0.875rem;
+  line-height: normal;
+  border-radius: 0.2rem;
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+  margin-right: 10px;
+  position: relative;
+  top: 1px;
+}
+
+.edit-link:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+/* App.css */
+/* App.css */
+.nav-link {
+  border: 2px solid #3D30A2;
+  /* 2px solid red border */
+  background-color: #3D30A2;
+  /* Red background color */
+  color: white !important;
+  /* Ensure text color is white */
+  padding: 10px;
+  border-radius: 5px;
+  margin: 6px;
+  font-weight: bold;
+  /* Optional: Rounded corners */
+}
+
+
+
+.nav-link:hover {
+  background-color: #221b57;
+  /* Darker red on hover */
+  border-color: #221b57;
+}
+
+/* Exclude the logo from getting background color and border */
+.logo {
+  background-color: transparent;
+  border: none;
+
+  color: #.logo {
+    background-color: transparent;
+    border: none;
+    color: #3D30A2;
+    /* Optional: Keep the logo text color */
+  }
+
+  ;
+  /* Optional: Keep the logo text color */
+}
+
+.logo:hover {
+  background-color: transparent;
+  border: none;
+  color: #3D30A2;
+  /* Optional: Keep the logo text color */
+}
+
+.Black {
+  border: 2px solid #ffffff;
+  /* 2px solid red border */
+  background-color: #ffffff;
+  /* Red background color */
+  color: rgb(0, 0, 0) !important;
+  /* Ensure text color is white */
+  padding: 10px;
+  border-radius: 5px;
+  margin: 6px;
+  font-weight: bold;
+}
+
+.Black:hover {
+  background-color: #ffffff;
+  /* Darker red on hover */
+  border-color: #ffffff;
+}
+
+.VesLogo img {
+  width: 50px;
+  height: 90px;
+}
+
+.VesLogo {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+}
+
+.VesLogo h1 {
+  font-size: 32px;
+}
+
+/* .VesLogo p {
+  font-size: 16px;
+} */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+.container-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  height: 100%;
+  width: 100%;
+  background-color: #f0f0ff;
+
+  background-image:
+    linear-gradient(to right, rgba(61, 48, 162, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(61, 48, 162, 0.05) 1px, transparent 1px);
+  background-size: 14px 24px;
+  background-attachment: fixed;
+
+}
+
+.circle-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
+  height: 310px;
+  width: 310px;
+  border-radius: 50%;
+  background-color: rgba(61, 48, 162, 0.5);
+
+  opacity: 0.2;
+  filter: blur(100px);
+}
+
+
+.doclock-logo {
+  width: 50px;
+  height: 50px;
+}

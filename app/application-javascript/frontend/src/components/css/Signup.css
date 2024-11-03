@@ -1,0 +1,71 @@
+/* SignUp Component Styles */
+form {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 50px auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    text-align: center;
+    color: #4e3e8c;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-family: 'Arial', sans-serif;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4e3e8c;
+    box-shadow: 0 0 5px rgba(78, 62, 140, 0.3);
+}
+
+button {
+    background-color: #4e3e8c;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #392f6f;
+}
+
+.forgot-password {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.forgot-password a {
+    color: #4e3e8c;
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+.wrapper {
+    padding: 10px;
+}

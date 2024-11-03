@@ -1,0 +1,10 @@
+.pageHead {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.pageAction {
+    margin: 20px auto;
+}

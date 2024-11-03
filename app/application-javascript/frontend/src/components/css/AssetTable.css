@@ -1,0 +1,47 @@
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    /* Adjust the gap as needed */
+}
+
+.button-group-2 {
+    display: flex;
+    gap: 10px;
+    /* Adjust the gap as needed */
+}
+
+.download-button {
+    background-color: #87CEEB;
+    /* Sky Blue */
+    border-color: #87CEEB;
+    font-weight: bold;
+    /* Match border color */
+}
+
+.share-button {
+    background-color: #87CEEB;
+    /* Sky Blue */
+    border-color: #87CEEB;
+    font-weight: bold;
+    /* Match border color */
+}
+
+/* Optional: Add hover effects */
+.download-button:hover,
+.share-button:hover {
+    background-color: #00BFFF;
+    /* Lighter shade on hover */
+    border-color: #00BFFF;
+    /* Match border color on hover */
+}
+
+.edit-link {
+    display: flex;
+    justify-content: center;
+    /* Horizontal centering */
+    align-items: center;
+    /* Vertical centering */
+    padding: 5px 10px;
+    /* Optional padding to give it some spacing */
+}

@@ -1,0 +1,123 @@
+/* Assetlist.css */
+
+/* Style for the table head */
+.table-wrapper table thead th {
+    background-color: #4A148C;
+    /* Background color for table head */
+    color: white;
+    /* Text color for table head */
+}
+
+/* Style for the document links */
+.table-wrapper table tbody tr td a:first-child:only-child {
+    color: #512DA8;
+    font-weight: bold;
+    /* Text color for links under the Document column */
+    text-decoration: none;
+    /* Remove underline from the links */
+}
+
+
+.table-wrapper table tbody tr td a:nth-child(2) {
+    background-color: rgb(237, 54, 54);
+    font-weight: bold;
+    /* Text color for links under the Document column */
+    text-decoration: none;
+    /* Remove underline from the links */
+}
+
+.table-wrapper table tbody tr td a {
+    font-weight: bold;
+    /* Text color for links under the Document column */
+    text-decoration: none;
+    /* Remove underline from the links */
+}
+
+/* Change color on hover for links */
+.table-wrapper table tbody tr td a:hover {
+    text-decoration: underline;
+    /* Add underline on hover */
+}
+
+/* Style for action buttons */
+.table-wrapper table tbody tr td .btn-edit {
+    background-color: rgb(2, 130, 2);
+    /* Background color for edit button */
+    color: white;
+
+    /* Text color for edit button */
+    border: none;
+    /* Remove border */
+    padding: 5px 10px;
+    /* Add padding */
+    cursor: pointer;
+    /* Show pointer cursor */
+}
+
+/* Style for delete button */
+.table-wrapper table tbody tr td .btn-delete {
+    background-color: red;
+    /* Background color for delete button */
+    color: white;
+    /* Text color for delete button */
+    border: none;
+    /* Remove border */
+    padding: 5px 10px;
+    /* Add padding */
+    cursor: pointer;
+    /* Show pointer cursor */
+}
+
+/* Optional: Add hover effects for buttons */
+.table-wrapper table tbody tr td .btn-edit:hover,
+.table-wrapper table tbody tr td .btn-delete:hover {
+    opacity: 0.8;
+    /* Slight transparency on hover */
+}
+
+.table-wrapper table {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    /* Shadow for table */
+    border-radius: 8px;
+    /* Optional: Add slight rounding to corners */
+    overflow: hidden;
+    /* Ensure shadow applies properly */
+}
+
+.widthCol {
+    width: 800px;
+}
+
+/* Assetlist.css */
+.table-wrapper {
+    margin: auto;
+}
+
+/* Increase the width of the 'Document' column */
+.table-wrapper th:nth-child(5),
+.table-wrapper td:nth-child(5) {
+    width: 300px;
+    /* Adjust this value as needed */
+    white-space: nowrap;
+}
+
+/* Increase the width of the 'Action' column */
+.table-wrapper th:nth-child(6),
+.table-wrapper td:nth-child(6) {
+    width: 150px;
+    /* Adjust this value as needed */
+    white-space: nowrap;
+    /* Prevent text wrapping */
+}
+
+/* AssetTableRow.css */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    /* Ensures that buttons/icons stay on the same line */
+}
+
+.headhigh {
+    font-weight: bold;
+}
