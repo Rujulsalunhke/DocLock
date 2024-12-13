@@ -1,3 +1,4 @@
+# DocLock
 ## Overview
 DocLock is an innovative document storage platform designed to provide a secure and efficient solution for storing, managing, and verifying important documents using blockchain technology. In today’s digital age, data security and privacy are paramount, especially when dealing with sensitive information. DocLock addresses these concerns by employing a decentralized ledger system, which ensures that documents are not only securely stored but also immutable and verifiable.
 
