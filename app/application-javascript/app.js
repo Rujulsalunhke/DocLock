@@ -46,8 +46,8 @@ function prettyJSONString(inputString) {
 
 // NOTE: If you see  kind an error like these:
 /*
-    2020-08-07T20:23:17.590Z - error: [DiscoveryService]: send[mychannel] - Channel:mychannel received discovery error:access denied
-    ******** FAILED to run the application: Error: DiscoveryService: mychannel error: access denied
+	2020-08-07T20:23:17.590Z - error: [DiscoveryService]: send[mychannel] - Channel:mychannel received discovery error:access denied
+	******** FAILED to run the application: Error: DiscoveryService: mychannel error: access denied
 
    OR
 
@@ -122,12 +122,14 @@ async function main() {
 			// Let's try a query type operation (function).
 			// This will be sent to just one peer and the results will be shown.
 
- 
+
 			console.log('\n--> Evaluate Transaction: GetAllAssets, function returns all the current assets on the ledger');
 			let result = await contract.evaluateTransaction('GetAllAssets');
 			console.log('\n--> Evaluate Transaction: GetAllUSsers, function returns all the current Users on the ledger');
 			let result1 = await contract.evaluateTransaction('GetAllUsers');
-			
+			console.log(result);
+
+
 			// console.log(`*** Result: ${prettyJSONString(result.toString())}`);
 
 

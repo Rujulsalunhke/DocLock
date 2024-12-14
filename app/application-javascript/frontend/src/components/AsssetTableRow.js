@@ -24,13 +24,23 @@ export default class AssetTableRow extends Component {
 
   async TransferAsset() {
     try {
+      const { obj } = this.props; // Assuming obj contains asset data
+      const newOwner = prompt('Enter the new owner\'s address:'); // Prompt the user for the new owner
+
+      if (!newOwner) {
+        alert('Please provide a new owner.');
+        return;
+      }
+
       const response = await axios.post('/api/transfer-asset', {
-        assetId: this.props.obj.ID,
+        id: obj.ID,          // assetId
+        newOwner,            // newOwner
       });
+
       alert('Asset transferred successfully!');
     } catch (error) {
       console.error('Error transferring asset:', error);
-      alert('Failed to transfer asset.');
+      alert('Failed to transfer asset: ' + (error.response ? error.response.data : error.message));
     }
   }
 
@@ -100,6 +110,7 @@ export default class AssetTableRow extends Component {
           <td>{obj.DocumentType}</td>
           <td>
             <a
+              className='cursor-pointer'
               href="#"
               onClick={(e) => {
                 e.preventDefault();
@@ -111,27 +122,42 @@ export default class AssetTableRow extends Component {
           </td>
           <td>
             <div className="button-group-2">
-              <Link className="edit-link bg-green-300 flex justify-center items-center" to={`/edit-asset/${obj.ID}`}>
+              <Link className="edit-link text-white bg-green-300 flex justify-center items-center" to={`/edit-asset/${obj.ID}`}>
                 Edit&nbsp;
                 <lord-icon
                   src="https://cdn.lordicon.com/gwlusjdu.json"
                   trigger="hover"
                   colors="primary:#ffffff"
-                  style={{ width: "20px", height: "20px", marginTop: "1px" }}>
-                </lord-icon>
+                  style={{ width: "20px", height: "20px", marginTop: "1px" }}
+                />
               </Link>
 
-
-              <Link className="edit-link bg-red-400" to={`/delete-asset/${obj.ID}`}>
+              <Link className="edit-link text-white bg-red-400" to={`/delete-asset/${obj.ID}`}>
                 Delete &nbsp;
                 <lord-icon
                   src="https://cdn.lordicon.com/skkahier.json"
                   trigger="hover"
                   colors="primary:#ffffff"
-                  style={{ width: "20px", height: "20px" }}>
-                </lord-icon>
-
+                  style={{ width: "20px", height: "20px" }}
+                />
               </Link>
+
+              {/* Add Transfer Button */}
+              <Link
+                className="edit-link bg-blue-400 flex items-center gap-1 hover:opacity-90"
+                to={`/transfer-asset/${obj.ID}`}
+                style={{ display: "inline-flex", alignItems: "center", color: "white" }}
+              >
+                Transfer &nbsp;
+                <lord-icon
+                  src="https://cdn.lordicon.com/olfvnikl.json"
+                  trigger="hover"
+                  stroke="bold"
+                  colors="primary:#ffffff,secondary:#ffffff"
+                  style={{ width: "20px", height: "20px" }}
+                />
+              </Link>
+
             </div>
             <div className="button-group">
               {/* Download Button */}

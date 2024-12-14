@@ -13,11 +13,11 @@ function Footer() {
             <footer className="footer text-white">
                 <Container fluid>
                     <Row className="justify-content-center">
-                        <Col md={12} className="text-center flex-logo">
+                        <Col md={15} className="text-center flex-logo">
                             <img
                                 src='/Footer-logo.png' // Ensure logo.jpeg is in the public folder
                                 alt="DocLock Logo"
-                                className="footer-logo mb-4"
+                                className="footer-logo"
                                 style={{ width: '90px', height: 'auto' }}
                             />
                             <h1>DocLock</h1>
@@ -39,9 +39,9 @@ function Footer() {
                                 <li><Link to="/signup" className="nav-link">Signup</Link></li>
                             </ul>
                         </Col>
-                        <Col md={2} className="text-center">
+                        <Col md={3} className="text-center">
                             <ul className="footer-contact">
-                                <li>Email: support@doclock.com</li>
+                                <li>Email: doclock.rujul@gmail.com</li>
                                 <li>Phone: +91 8828493222</li>
                                 <li>VESIT, HAMC, Collector's Colony, Chembur, Mumbai - 400607</li>
                             </ul>

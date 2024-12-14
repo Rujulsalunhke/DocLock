@@ -120,4 +120,21 @@
 
 .headhigh {
     font-weight: bold;
+    font-size: 28px;
+    margin-left: 10px;
 }
+
+th {
+    white-space: nowrap; /* Prevents text from breaking into a new line */
+    text-align: center; /* Optional: Aligns text to center */
+    padding: 10px; /* Optional: Adds space for better readability */
+  }
+
+  .no-wrap-header {
+    white-space: nowrap; /* Prevent line break */
+    text-align: center;
+    padding: 10px;
+  }
+  
+
+/* Updated theme  */

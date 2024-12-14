@@ -55,17 +55,17 @@ export default class AssetList extends Component {
 
     return (
       <div className="table-wrapper">
-        <h2 className="headhigh">Assets of {ownerName}</h2>
+        <h2 className="headhigh">ASSETS OF @{ownerName}</h2>
 
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Owner</th>
-              <th>DocumentFormat</th>
-              <th>DocumentType</th>
-              <th>Document</th>
-              <th className="widthCol">Action</th>
+              <th>ID</th>
+              <th>USERNAME</th>
+              <th>FROMAT</th>
+              <th className="no-wrap-header">DOCUMENT TYPE</th>
+              <th>ID PROOF</th>
+              <th className="widthCol">ACTIONS</th>
             </tr>
           </thead>
           <tbody>

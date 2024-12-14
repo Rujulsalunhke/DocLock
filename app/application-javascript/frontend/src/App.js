@@ -6,6 +6,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import './index.css'; // Make sure this is the correct path to your CSS file
+
 
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 
@@ -13,11 +15,13 @@ import CreateAsset from "./components/Create-asset";
 import EditAsset from "./components/Edit-asset";
 import AssetList from "./components/Asset-list";
 import DeleteAsset from "./components/Delete-asset";
+import TransferAsset from "./components/Transfer-asset";
 import Login from './components/Login';
 import Signup from './components/Signup';
 import OwnerAssetList from './components/OwnerAssetList';
 import Home from './components/Home';
 import Footer from './components/Footer'; // Import Footer
+import VerifyEmail from './components/VerifyEmail'; // Import VerifyEmail Component
 
 function App() {
   const [loggedInOwner, setLoggedInOwner] = useState('');
@@ -59,13 +63,13 @@ function App() {
                 </Link>
               </Navbar.Brand>
 
-              <div className="VesLogo">
+              {/* <div className="VesLogo">
                 <img src="/VESIT LOGO ICON.png" alt="" />
                 <div className="CollegeName">
                   <h1>VES Institute of Technology</h1>
                   <p>Department of Electronics and Computer Science</p>
                 </div>
-              </div>
+              </div> */}
 
               <Nav className="ml-auto">
                 {loggedInOwner ? (
@@ -113,6 +117,7 @@ function App() {
                   <Route exact path="/edit-asset/:id" component={EditAsset} />
                   <Route exact path="/asset-list" component={AssetList} />
                   <Route exact path="/delete-asset/:id" component={DeleteAsset} />
+                  <Route exact path="/transfer-asset/:id" component={TransferAsset} />
                   <Route
                     exact
                     path="/login"
@@ -124,6 +129,7 @@ function App() {
                     path="/owner-asset-list"
                     render={(props) => loggedInOwner ? <OwnerAssetList ownerName={loggedInOwner} {...props} /> : <Redirect to="/login" />}
                   />
+                  <Route exact path="/verify-email" component={VerifyEmail} /> {/* Add VerifyEmail Route */}
                 </Switch>
               </div>
             </Col>

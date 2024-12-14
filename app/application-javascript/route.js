@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const app = express();
 const { Gateway, Wallets } = require('fabric-network');
 const FabricCAServices = require('fabric-ca-client');
 const path = require('path');
@@ -16,7 +17,7 @@ async function connectToGateway() {
     const ccp = buildCCPOrg1();
     const caClient = buildCAClient(FabricCAServices, ccp, 'ca.org1.example.com');
     const wallet = await buildWallet(Wallets, walletPath);
-    
+
     await enrollAdmin(caClient, wallet, mspOrg1);
     await registerAndEnrollUser(caClient, wallet, mspOrg1, org1UserId, 'org1.department1');
 
@@ -34,7 +35,7 @@ async function cllBc() {
     try {
         const network = await gateway.getNetwork(channelName);
         const contract = network.getContract(chaincodeName);
-        
+
         console.log('\n--> Evaluate Transaction: GetAllAssets');
         const result = await contract.evaluateTransaction('GetAllAssets');
         return { data: `${result.toString()}` };
@@ -48,12 +49,12 @@ async function CreateNewAssetBC(reqAsset) {
     try {
         const network = await gateway.getNetwork(channelName);
         const contract = network.getContract(chaincodeName);
-        
+
         console.log('\n--> Submit Transaction: CreateAsset');
-        const result = await contract.submitTransaction('CreateAsset', 
-            reqAsset.ID, 
-            reqAsset.DocumentFormat, 
-            reqAsset.DocumentType, 
+        const result = await contract.submitTransaction('CreateAsset',
+            reqAsset.ID,
+            reqAsset.DocumentFormat,
+            reqAsset.DocumentType,
             reqAsset.Owner,
             reqAsset.DocumentURL
         );
@@ -68,7 +69,7 @@ async function GetAssetDetails(AssetID) {
     try {
         const network = await gateway.getNetwork(channelName);
         const contract = network.getContract(chaincodeName);
-        
+
         console.log('\n--> Evaluate Transaction: ReadAsset');
         const result = await contract.evaluateTransaction('ReadAsset', AssetID);
         return { data: `${result.toString()}` };
@@ -82,15 +83,15 @@ async function UpdateAssetBC(AssetDetails) {
     try {
         const network = await gateway.getNetwork(channelName);
         const contract = network.getContract(chaincodeName);
-        
+
         console.log('\n--> Submit Transaction: UpdateAsset');
         console.log('Asset Details:', AssetDetails);
-        
-        const result = await contract.submitTransaction('UpdateAsset', 
-            AssetDetails.ID, 
-            AssetDetails.DocumentFormat, 
-            AssetDetails.DocumentType, 
-            AssetDetails.Owner, 
+
+        const result = await contract.submitTransaction('UpdateAsset',
+            AssetDetails.ID,
+            AssetDetails.DocumentFormat,
+            AssetDetails.DocumentType,
+            AssetDetails.Owner,
             AssetDetails.DocumentURL
         );
 
@@ -104,12 +105,38 @@ async function UpdateAssetBC(AssetDetails) {
     }
 }
 
+
+async function TransferAssetBC(assetID, newOwner) {
+    const gateway = await connectToGateway();
+    try {
+        const network = await gateway.getNetwork(channelName);
+        const contract = network.getContract(chaincodeName);
+
+        console.log('\n--> Submit Transaction: TransferAsset');
+        // Call the chaincode's TransferAsset function with the assetID and newOwner
+        await contract.submitTransaction('TransferAsset', assetID, newOwner);
+        console.log(`*** Ownership of asset ${assetID} successfully transferred to ${newOwner}`);
+    } catch (error) {
+        console.error(`******** FAILED to transfer the asset: ${error}`);
+        throw new Error(`Transfer failed: ${error.message}`);
+    } finally {
+        gateway.disconnect();
+    }
+}
+
+
+
+
+
+
+
+
 async function DeleteAssetBC(assetID) {
     const gateway = await connectToGateway();
     try {
         const network = await gateway.getNetwork(channelName);
         const contract = network.getContract(chaincodeName);
-        
+
         console.log('\n--> Submit Transaction: DeleteAsset');
         await contract.submitTransaction('DeleteAsset', assetID);
         console.log('*** Asset Deleted');
@@ -126,7 +153,7 @@ async function GetAllUsers() {
     try {
         const network = await gateway.getNetwork(channelName);
         const contract = network.getContract(chaincodeName);
-        
+
         console.log('\n--> Evaluate Transaction: GetAllUsers');
         const result = await contract.evaluateTransaction('getAllUsers');
         return { data: `${result.toString()}` };
@@ -180,6 +207,33 @@ router.route("/update-asset/:id").put(async (req, res) => {
     }
 });
 
+
+
+// Transfer Asset
+router.route("/transfer-asset/:id").put(async (req, res) => {
+    try {
+        const { newOwner } = req.body; // Expect `newOwner` in the request body
+        if (!newOwner) {
+            return res.status(400).json({ error: 'New owner is required' });
+        }
+
+        // Pass the asset ID and the new owner to the blockchain function
+        await TransferAssetBC(req.params.id, newOwner);
+
+        res.status(200).json({ msg: `Ownership of asset ${req.params.id} transferred to ${newOwner}` });
+    } catch (error) {
+        console.error(`Transfer asset error: ${error.message}`);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+
+
+
+
+
+
 // Delete Asset
 router.route("/delete-asset/:id").delete(async (req, res) => {
     try {
@@ -203,4 +257,3 @@ router.route("/users").get(async (req, res) => {
 });
 
 module.exports = router;
-

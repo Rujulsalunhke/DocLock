@@ -1,128 +1,204 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';  // Import withRouter from react-router-dom
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'; // For React Router v5
 import './css/Signup.css';
 
-class SignUp extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      email: '',
-      password: '',
-      loading: false  // Add loading state
-    };
-  }
+const SignUp = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  const [otp, setOtp] = useState('');
+  const [otpError, setOtpError] = useState('');
+  const history = useHistory();
+  let isMounted = true;
 
-  // Handle input changes
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  // Validate form inputs
+  const validateInputs = () => {
+    const { username, email, password } = formData;
+    const newErrors = {};
+
+    if (!username.trim()) newErrors.username = 'Username is required.';
+    if (!email.trim() || !/\S+@\S+\.\S+/.test(email))
+      newErrors.email = 'Please enter a valid email.';
+    if (!password || password.length < 6)
+      newErrors.password = 'Password must be at least 6 characters long.';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  // Handle form submission
-  handleSubmit = async (e) => {
-    e.preventDefault();
+  // Handle input changes
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    setErrors({ ...errors, [e.target.name]: '' });
+  };
 
-    const { username, email, password } = this.state;
-
-    this.setState({ loading: true });  // Set loading to true when form submission starts
-
+  // Function to send OTP
+  const sendOtp = async () => {
     try {
-      // Make API call to create a new user
-      const response = await fetch('http://localhost:4000/users/createUser', {
+      setLoading(true);
+      const response = await fetch('http://localhost:4000/users/sendOtp', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password, email })
+        body: JSON.stringify({ email: formData.email }),
       });
 
       if (response.ok) {
-        // Parse the JSON response
-        const result = await response.json();
-        alert('User created successfully!');
-        console.log('Created user:', result);
-
-        // Redirect to the login page after successful sign-up
-        this.props.history.push('/login');
+        setIsOtpSent(true);
+        alert('OTP sent to your email!');
       } else {
-        const error = await response.text();
-        alert('Error: ' + error);
+        const errorMsg = await response.text();
+        alert(`Error: ${errorMsg}`);
       }
     } catch (error) {
-      console.error('Error during sign-up:', error);
-      alert('Error: ' + error.message);
+      console.error('Error sending OTP:', error);
+      alert('Failed to send OTP. Please try again.');
     } finally {
-      this.setState({ loading: false });  // Set loading to false once the API call completes
+      setLoading(false);
     }
   };
 
-  render() {
-    const { loading } = this.state;  // Destructure loading state
+  // Function to verify OTP
+  const verifyOtp = async (e) => {
+    e.preventDefault();
+    if (!otp) {
+      setOtpError('OTP is required');
+      return;
+    }
 
-    return (
-      <form onSubmit={this.handleSubmit} style={{ backgroundColor: '#fff', borderRadius: '10px', padding: '20px', maxWidth: '400px', margin: '50px auto', boxShadow: '0 0 15px rgba(0, 0, 0, 0.1)' }}>
-        <h3 style={{ textAlign: 'center', color: '#4e3e8c', fontFamily: 'Arial, sans-serif', marginBottom: '20px' }}>Sign Up</h3>
+    try {
+      const response = await fetch('http://localhost:4000/users/verifyOtp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: formData.email, otp }),
+      });
 
-        <div className="mb-3">
-          <label>Username</label>
+      if (response.ok) {
+        alert('OTP verified successfully!');
+        handleSubmit();
+      } else {
+        const errorMsg = await response.text();
+        setOtpError(errorMsg);
+      }
+    } catch (error) {
+      console.error('Error verifying OTP:', error);
+      setOtpError('Something went wrong. Please try again later.');
+    }
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e?.preventDefault();
+    if (!validateInputs()) return;
+
+    setLoading(true);
+    try {
+      const response = await fetch('http://localhost:4000/users/createUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert('User created successfully! Please verify your email.');
+        history.push('/login');
+      } else {
+        const errorMsg = await response.text();
+        alert(`Error: ${errorMsg}`);
+      }
+    } catch (error) {
+      console.error('Error during sign-up:', error);
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  return (
+    <form className="signup-form" onSubmit={handleSubmit}>
+      <h3 className="signup-title">Sign Up</h3>
+      <div className="form-group">
+        <label>Username</label>
+        <input
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          placeholder="Enter username"
+        />
+        {errors.username && <small className="error">{errors.username}</small>}
+      </div>
+      <div className="form-group">
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Enter email"
+        />
+        {errors.email && <small className="error">{errors.email}</small>}
+      </div>
+      <div className="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Enter password"
+        />
+        {errors.password && <small className="error">{errors.password}</small>}
+      </div>
+      {isOtpSent && (
+        <div className="form-group">
+          <label>OTP</label>
           <input
             type="text"
-            name="username"
-            className="form-control"
-            placeholder="Enter username"
-            value={this.state.username}
-            onChange={this.handleChange}
-            required
-            style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '5px', marginBottom: '15px', fontSize: '14px' }}
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+            placeholder="Enter OTP"
           />
-        </div>
-
-        <div className="mb-3">
-          <label>Email address</label>
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            placeholder="Enter email"
-            value={this.state.email}
-            onChange={this.handleChange}
-            required
-            style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '5px', marginBottom: '15px', fontSize: '14px' }}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            className="form-control"
-            placeholder="Enter password"
-            value={this.state.password}
-            onChange={this.handleChange}
-            required
-            style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '5px', marginBottom: '15px', fontSize: '14px' }}
-          />
-        </div>
-
-        <div className="d-grid">
-          <button
-            type="submit"
-            className="btn btn-primary"
-            style={{ backgroundColor: '#4e3e8c', color: 'white', padding: '10px', border: 'none', borderRadius: '5px', fontSize: '16px', cursor: 'pointer', width: '100%' }}
-            disabled={loading}  // Disable the button when loading
-          >
-            {loading ? 'Signing Up...' : 'Sign Up'}  {/* Show loading text */}
+          {otpError && <small className="error">{otpError}</small>}
+          <button type="button" onClick={verifyOtp} disabled={loading}>
+            {loading ? 'Verifying OTP...' : 'Verify OTP'}
           </button>
         </div>
+      )}
+      {!isOtpSent && (
+        <button type="button" onClick={sendOtp} disabled={loading}>
+          {loading ? 'Sending OTP...' : 'Send OTP'}
+        </button>
+      )}
+      {isOtpSent && (
+        <button type="submit" disabled={loading}>
+          {loading ? 'Signing Up...' : 'Sign Up'}
+        </button>
+      )}
+      <p>
+        Already registered? <a href="/login">Login</a>
+      </p>
+    </form>
+  );
+};
 
-        <p className="forgot-password text-right" style={{ textAlign: 'center', marginTop: '15px' }}>
-          Already registered? <a href="/login" style={{ color: '#4e3e8c', textDecoration: 'none' }}>Login</a>
-        </p>
-      </form>
-    );
-  }
-}
-
-// Wrap the SignUp component with withRouter to access history
-export default withRouter(SignUp);
+export default SignUp;

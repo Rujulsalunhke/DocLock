@@ -24,6 +24,7 @@
     /* Sky Blue */
     border-color: #87CEEB;
     font-weight: bold;
+    color: white;
     /* Match border color */
 }
 
@@ -45,3 +46,10 @@
     padding: 5px 10px;
     /* Optional padding to give it some spacing */
 }
+
+.edit-link:hover {
+    text-decoration: underline;
+    /* Re-add underline on hover for clarity */
+}
+
+/* Updated Theme  */

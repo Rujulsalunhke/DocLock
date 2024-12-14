@@ -1,0 +1,123 @@
+/* TransferAsset.css */
+
+.form-wrapper {
+    background-color: #fff;
+    padding: 30px; /* Reduced padding */
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.pageHead {
+    text-align: center;
+    color: #4e3e8c;
+    font-family: 'Arial, sans-serif';
+    margin-bottom: 20px; /* Reduced margin */
+    font-weight: bold;
+}
+
+.pageAction {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.pageAction .form-control {
+    border: 1px solid #ccc;
+    padding: 8px; /* Reduced padding */
+    margin-bottom: 15px; /* Reduced margin */
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+/* Custom button style for Transfer Asset */
+.centerIcon {
+    background-color: #4e3e8c;
+    color: white;
+    padding: 8px 18px; /* Adjusted padding */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px; /* Reduced margin */
+}
+
+.centerIcon:hover {
+    background-color: #3a2d6b;
+}
+
+/* Modal styles for confirmation */
+.modal-content {
+    background-color: #fff;
+    padding: 25px; /* Reduced padding */
+    border-radius: 10px;
+}
+
+.modal-header {
+    background-color: #4e3e8c;
+    color: white;
+    font-weight: bold;
+    padding: 12px 15px; /* Reduced padding */
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px; /* Reduced padding */
+}
+
+.modal-footer .btn-secondary {
+    background-color: #ccc;
+    color: #fff;
+    border: none;
+    padding: 6px 14px; /* Reduced padding */
+    border-radius: 5px;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #bbb;
+}
+
+.modal-footer .btn-primary {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 14px; /* Reduced padding */
+    border-radius: 5px;
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: #c0392b;
+}
+
+/* Error message styling */
+.alert-danger {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px; /* Reduced padding */
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px; /* Reduced margin */
+}
+
+/* For New Owner input */
+.form-control:focus {
+    border-color: #4e3e8c;
+    box-shadow: 0 0 5px rgba(78, 62, 140, 0.3);
+}
+
+/* For the hover effect on the form */
+.form-wrapper:hover {
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+}
+
+.transferBtn{
+font-size: 20px;
+}

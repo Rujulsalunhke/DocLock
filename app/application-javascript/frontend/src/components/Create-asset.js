@@ -63,12 +63,10 @@ class CreateAsset extends Component {
     }
   }
 
-  //  Fill Your API Key and Secret
-
   async uploadToIPFS(file) {
     const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
-    const apiKey = 'Add Your API Key ';
-    const apiSecret = 'Add Your Secret';
+    const apiKey = 'edd76b1ea420b33ab3eb';
+    const apiSecret = '03c3aed9888241af560199ff6ec7991e3a9cdde30637bbf5fc4ea8e4cdc90636';
 
     const formData = new FormData();
     formData.append('file', file);
