@@ -23,10 +23,10 @@ A basic CRUD app created by react and node.
 ## Visualization:
 
 - ### Create a data
-  ![Create lists](public/assets/create.png)
+  ![Create lists](images/create-asset.png)
 - ### See Lists
-  ![See Lists](public/assets/lists.png)
+  ![See Lists](images/asset-list.png)
 - ### Update a data
-  ![See Lists](public/assets/update.png)
+  ![See Lists](images/update-asset.png)
 - ### After delete a data
-  ![See Lists](public/assets/delete.png)
+  ![See Lists](images/deleteasset.png)
